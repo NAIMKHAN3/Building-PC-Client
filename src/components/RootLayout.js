@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const RootLayout = ({children}) => {
@@ -7,7 +8,7 @@ const RootLayout = ({children}) => {
             <div>
                 {children}
             </div>
-            <h1>This is Footer</h1>
+            <Footer/>
         </div>
     );
 };
