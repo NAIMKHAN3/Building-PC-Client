@@ -45,7 +45,7 @@ const Navbar = () => {
                                 }
                             </div>
                         </div></li>
-                        <Li>Login</Li>
+                       <Link href={'/login'}> <Li>Login</Li></Link>
                         <li><Button>Log out</Button></li>
                         <li><Button>PC Build</Button></li>
                     </ul>
