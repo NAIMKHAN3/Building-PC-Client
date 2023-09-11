@@ -1,15 +1,24 @@
 import Button from '@/components/Button';
+import RootLayout from '@/components/RootLayout';
+import { addProduct } from '@/redux/pcBuild/pcBuildSlice';
 import { useGetProductsQuery } from '@/redux/product/productApi';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 const BuildProductDetails = () => {
+    const dispatch = useDispatch();
     const router = useRouter()
     const id = router.query?.categoryId
     const { data, isLoading } = useGetProductsQuery(id)
+    const handleProduct = (data) => {
+        dispatch(addProduct(data))
+        router.push('/pc-build')
+    }
     if (isLoading) {
         return <h1>Loading...</h1>
     }
+  
     return (
         <div className='max-w-5xl mx-auto my-5'>
             {
@@ -22,7 +31,7 @@ const BuildProductDetails = () => {
                             <h1 className='mt-1'>Price: {product.price}</h1>
                         </div>
                     </div>
-                    <Button className={'mt-3'}>Select</Button>
+                    <button className='mt-3 bg-[#4361ee] px-3 py-2 rounded-md text-white mr-3 hover:bg-gray-600 duration-300' onClick={()=> handleProduct(product)}>Select</button>
                 </div>)
             }
         </div>
@@ -30,3 +39,7 @@ const BuildProductDetails = () => {
 };
 
 export default BuildProductDetails;
+
+BuildProductDetails.getLayout = function getLayout(page) {
+    return <RootLayout>{page}</RootLayout>
+}
