@@ -49,12 +49,12 @@ const Navbar = () => {
                             </div>
                         </div></li>
                         {
-                            session?.user ? <li><Button onClick={signOut}>Log out</Button></li> :
+                            session?.user ? <li><button onClick={signOut} className='bg-[#4361ee] px-3 py-2 rounded-md text-white mr-3 hover:bg-gray-600 duration-300'>Log out</button></li> :
                             <Link href={'/login'}> <Li>Login</Li></Link>
                         }
                       
                         
-                        <li><Button>PC Build</Button></li>
+                        <Link href={'/pc-build'}><li><Button>PC Build</Button></li></Link>
                     </ul>
                 </div>
             </div>
