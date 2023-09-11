@@ -2,7 +2,9 @@ import RootLayout from '@/components/RootLayout'
 
 export default function Home() {
   return (
-    <h1 className='text-indigo-900'>Project Setup</h1>
+    <div>
+      <img className='w-full  md:h-[500px]' src="https://i.ibb.co/BsdJWGY/Capture.png" alt="" />
+    </div>
   )
 }
 

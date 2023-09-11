@@ -1,7 +1,9 @@
+import Navbar from "./Navbar";
+
 const RootLayout = ({children}) => {
     return (
         <div>
-            <h1>This is navbar</h1>
+           <Navbar/>
             <div>
                 {children}
             </div>
