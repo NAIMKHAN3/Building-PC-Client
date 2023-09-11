@@ -5,8 +5,11 @@ import Button from './Button';
 import Li from './Li';
 import Link from 'next/link';
 import { useGetCategoryQuery } from '@/redux/category/categoryApi';
+import { useSession, signOut } from 'next-auth/react';
 
 const Navbar = () => {
+
+    const { data: session } = useSession();
     const [categoryShow, setCategoryShow] = useState(false)
     const { data, isLoading } = useGetCategoryQuery()
     if (isLoading) {
@@ -45,8 +48,12 @@ const Navbar = () => {
                                 }
                             </div>
                         </div></li>
-                       <Link href={'/login'}> <Li>Login</Li></Link>
-                        <li><Button>Log out</Button></li>
+                        {
+                            session?.user ? <li><Button onClick={signOut}>Log out</Button></li> :
+                            <Link href={'/login'}> <Li>Login</Li></Link>
+                        }
+                      
+                        
                         <li><Button>PC Build</Button></li>
                     </ul>
                 </div>
