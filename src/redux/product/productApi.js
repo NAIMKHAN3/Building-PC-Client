@@ -5,6 +5,9 @@ const productApi = apiSlice.injectEndpoints({
         getProducts: builder.query({
             query: (id) => `/product/category-products/${id}`
         }),
+        getRandomProducts: builder.query({
+            query: () => `/product/random-products`
+        }),
         getSingleProduct: builder.query({
             query: (id) => `/product/single-product/${id}`
         }),
@@ -12,4 +15,4 @@ const productApi = apiSlice.injectEndpoints({
 })
 
 
-export const {useGetProductsQuery, useGetSingleProductQuery} = productApi;
+export const {useGetProductsQuery, useGetSingleProductQuery, useGetRandomProductsQuery} = productApi;
