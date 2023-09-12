@@ -6,6 +6,7 @@ import Li from './Li';
 import Link from 'next/link';
 import { useGetCategoryQuery } from '@/redux/category/categoryApi';
 import { useSession, signOut } from 'next-auth/react';
+import MobileNavbar from './MobileNav';
 
 const Navbar = () => {
 
@@ -13,7 +14,7 @@ const Navbar = () => {
     const [categoryShow, setCategoryShow] = useState(false)
     const { data, isLoading } = useGetCategoryQuery()
     if (isLoading) {
-        return <h1>Loading....</h1>
+        return <h1 className="text-center my-2 font-semibold">Loading....</h1>
     }
 
     const handleCategory = () => {
@@ -21,8 +22,9 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-gray-100'>
-            <div className='flex justify-between items-center max-w-7xl mx-auto'>
+        <div className='bg-gray-100 '>
+           <div className='hidden md:block'>
+           <div className='flex justify-between items-center max-w-7xl mx-auto'>
                 <div>
                     <Image src="https://i.ibb.co/xfZfGns/pc-logo.png" width={150} height={50} alt='' />
                 </div>
@@ -49,15 +51,18 @@ const Navbar = () => {
                             </div>
                         </div></li>
                         {
-                            session?.user ? <li><button onClick={signOut} className='bg-[#4361ee] px-3 py-2 rounded-md text-white mr-3 hover:bg-gray-600 duration-300'>Log out</button></li> :
+                            session?.user ? <li><button onClick={signOut} className='bg-red-500 px-3 py-2 rounded-md text-white mr-3 hover:bg-gray-600 duration-300'>Log out</button></li> :
                             <Link href={'/login'}> <Li>Login</Li></Link>
                         }
+                        <Link href={'/pc-build'}><li><Button>PC Builder</Button></li></Link>
                       
                         
-                        <Link href={'/pc-build'}><li><Button>PC Build</Button></li></Link>
+                       
                     </ul>
                 </div>
             </div>
+           </div>
+            <MobileNavbar/>
         </div>
 
     );

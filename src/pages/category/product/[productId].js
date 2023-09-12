@@ -1,26 +1,30 @@
 import RootLayout from '@/components/RootLayout';
 import { useGetSingleProductQuery } from '@/redux/product/productApi';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const ProductDetails = ({data}) => {
+const ProductDetails = ({ data }) => {
     const router = useRouter();
     const id = router.query?.productId;
     // const { data, isLoading } = useGetSingleProductQuery(id);
     // if (isLoading) {
-    //     return <h1>Loading...</h1>
+    //     return <h1 className="text-center my-2 font-semibold">Loading...</h1>
     // }
     const { keyFeatures,
         image, productName, reviews, category, price, rating, status, description, indivisualRating } = data.data;
     console.log(data)
     return (
         <div className='max-w-6xl mx-auto p-4'>
+            <Head>
+                <title>Build PC</title>
+            </Head>
             <img className='w-full md:h-[500px]' src={image} alt="" />
             <div className='flex flex-col md:flex-row justify-between'>
                 <div className='font-semibold mt-3'>
                     <h1 className='mt-2'>Name: {productName}</h1>
                     <h1 className='mt-2'>Category: {category}</h1>
-                    <h1 className='mt-2'>Price: {price}</h1>
+                    <h1 className='mt-2'>Price: $ {price}</h1>
                     <h1 className='mt-2'>Status: <span className={`${status === "In Stock" ? "text-[#1fc600]" : "text-red-500"}`}>{status}</span></h1>
                     <h1 className='mt-2'>Rating: {rating}</h1>
                     <h1 className='mt-2'>Indivisual Rating: {indivisualRating}</h1>
