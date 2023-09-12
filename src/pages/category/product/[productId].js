@@ -3,13 +3,13 @@ import { useGetSingleProductQuery } from '@/redux/product/productApi';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const ProductDetails = () => {
+const ProductDetails = ({data}) => {
     const router = useRouter();
     const id = router.query?.productId;
-    const { data, isLoading } = useGetSingleProductQuery(id);
-    if (isLoading) {
-        return <h1>Loading...</h1>
-    }
+    // const { data, isLoading } = useGetSingleProductQuery(id);
+    // if (isLoading) {
+    //     return <h1>Loading...</h1>
+    // }
     const { keyFeatures,
         image, productName, reviews, category, price, rating, status, description, indivisualRating } = data.data;
     console.log(data)
@@ -50,7 +50,7 @@ const ProductDetails = () => {
                 <h1 className='text-center font-semibold text-2xl'>Reviews: {reviews?.length}</h1>
                 {
                     reviews?.map((review, i) => <div key={i} className='mt-3 font-semibold'>
-                        <h1><span className='font-bold'>{i +1}. </span>Rating: {review.rating}</h1>
+                        <h1><span className='font-bold'>{i + 1}. </span>Rating: {review.rating}</h1>
                         <h1>Comment: {review.comment}</h1>
                     </div>)
                 }
@@ -60,6 +60,32 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+export const getStaticPaths = async () => {
+
+    const res = await fetch('https://building-pc.vercel.app/api/v1/product/products')
+    const products = await res.json()
+
+
+    const paths = products?.data.map((product) => ({
+        params: { productId: product._id },
+    }))
+    return { paths, fallback: false }
+}
+
+export const getStaticProps = async (contex) => {
+    const { params } = contex;
+
+    const res = await fetch(`https://building-pc.vercel.app/api/v1/product/single-product/${params.productId}`)
+    const data = await res.json()
+
+    return {
+        props: {
+            data
+        },
+    };
+
+}
 
 ProductDetails.getLayout = function getLayout(page) {
     return <RootLayout>{page}</RootLayout>

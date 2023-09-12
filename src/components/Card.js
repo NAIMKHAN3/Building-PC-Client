@@ -4,7 +4,7 @@ import React from 'react';
 const Card = ({product}) => {
     return (
         <Link href={`/category/product/${product._id}`}>
-        <div  className='border p-3 font-medium rounded-md shadow-sm hover:shadow-lg'>
+        <div  className='border h-[480px] p-3 font-medium rounded-md shadow-sm hover:shadow-lg'>
                     <img className='w-full h-72' src={product.image} alt="" />
                     <div className='mt-3'>
                         <h1>Name: {product.productName}</h1>

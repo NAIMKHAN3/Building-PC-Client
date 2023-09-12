@@ -29,7 +29,7 @@ const Navbar = () => {
                 <div>
                     <ul className='flex items-center'>
 
-                        <Li>Home</Li>
+                        <Link href={'/'}><Li>Home</Li></Link>
                         <li onMouseEnter={handleCategory} onMouseLeave={handleCategory} className='mr-3 font-semibold cursor-pointer py-2'><div className='relative'>
                             <h1 className=''>Category</h1>
                             <div>
